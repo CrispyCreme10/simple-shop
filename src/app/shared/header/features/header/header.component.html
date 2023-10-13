@@ -1,0 +1,22 @@
+<div class="wrapper">
+  <span routerLink="/">SIMPLE SHOP</span>
+  <div class="search">
+    <select class="categories">
+      <option *ngFor="let category of categories" [value]="category">{{category}}</option>
+    </select>
+    <input type="text" placeholder="Search for items..." />
+    <button>
+      <fa-icon [icon]="faSearch" size="xl"></fa-icon>
+    </button>
+  </div>
+  <div class="right-items">
+    <div class="icon-dropdown">
+      <fa-icon [icon]="faCog" size="xl" (click)="settingsDropdownToggle()"></fa-icon>
+      <div class="dropdown-menu" [class.active]="isSettingsDropdownOpen"></div>
+    </div>
+    <div class="icon-dropdown">
+      <fa-icon [icon]="faUser" size="xl" (click)="accountDropdownToggle()"></fa-icon>
+      <div class="dropdown-menu" [class.active]="isAccountDropdownOpen"></div>
+    </div>
+  </div>
+</div>
