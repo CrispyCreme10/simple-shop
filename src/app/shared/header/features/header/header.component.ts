@@ -1,9 +1,11 @@
-import { NgFor } from '@angular/common';
-import { Component } from '@angular/core';
+import { AsyncPipe, NgClass, NgFor } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCircleUser } from '@fortawesome/free-regular-svg-icons';
 import { faCog, faSearch, faUser } from '@fortawesome/free-solid-svg-icons';
+import { Observable } from 'rxjs';
+import { ThemeStateService } from 'src/app/shared/services/theme-state.service';
 
 @Component({
   selector: 'app-header',
@@ -12,11 +14,13 @@ import { faCog, faSearch, faUser } from '@fortawesome/free-solid-svg-icons';
   imports: [
     NgFor,
     FontAwesomeModule,
-    RouterLink
+    RouterLink,
+    NgClass,
+    AsyncPipe
   ],
   standalone: true
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   categories: string[] = [
     'All',
     'Auto',
@@ -32,6 +36,14 @@ export class HeaderComponent {
   faSearch = faSearch;
   faCog = faCog;
   faUser = faCircleUser;
+
+  constructor(private themeState: ThemeStateService) {
+
+  }
+
+  ngOnInit(): void {
+    
+  }
 
   settingsDropdownToggle() {
     this.isSettingsDropdownOpen = !this.isSettingsDropdownOpen;

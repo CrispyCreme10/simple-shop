@@ -1,0 +1,53 @@
+@import './themes/light-green';
+@import './themes/light-green-dark';
+
+@function map-get-value($map, $key) {
+  @if map-has-key($map, $key) {
+    @return map-get($map, $key);
+  } @else {
+    @error "ERROR: Specified key #{$key} does not exist in the mapping #{map-get($map,name)}";
+  }
+}
+
+@mixin set-theme($map) {
+  .text {
+    color: map-get-value($map, text);
+  }
+
+  .bg {
+    background-color: map-get-value($map, background);
+  }
+
+  .primary-bg {
+    background-color: map-get-value($map, primary);
+  }
+
+  .primary-text {
+    color: map-get-value($map, primary);
+  }
+
+  .secondary-bg {
+    background-color: map-get-value($map, secondary);
+  }
+
+  .secondary-text {
+    color: map-get-value($map, secondary);
+  }
+  
+  .accent-bg {
+    background-color: map-get-value($map, accent);
+  }
+
+  .accent-text {
+    color: map-get-value($map, accent);
+  }
+}
+
+// set theme
+.light-green {
+  @include set-theme($light-green-map);
+}
+
+.light-green--dark {
+  @include set-theme($light-green-dark-map);
+}

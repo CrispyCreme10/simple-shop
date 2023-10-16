@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Renderer2 } from '@angular/core';
+import { ThemeStateService } from './shared/services/theme-state.service';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'simple-shop';
+  constructor(
+    private render: Renderer2,
+    private themeState: ThemeStateService
+  ) {
+    this.themeState.theme$
+    .pipe(
+      tap(theme => this.render.addClass(document.body, theme))
+    )
+    .subscribe();
+  }
 }
+
